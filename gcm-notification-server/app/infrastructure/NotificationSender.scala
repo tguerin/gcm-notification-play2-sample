@@ -22,7 +22,7 @@ object NotificationSender {
   def handleResult(regId: String, result: Result) {
     Option(result.getMessageId) match {
       case Some(s) => handleMultipleRegistration(regId, Option(result.getCanonicalRegistrationId))
-      case None => handleError(result.getErrorCodeName, regId)
+      case None => handleError(regId, result.getErrorCodeName)
     }
   }
 
@@ -35,6 +35,7 @@ object NotificationSender {
   def handleError(deviceRegistrationId: String, errorCode: String) {
     errorCode match {
       case Constants.ERROR_NOT_REGISTERED => H2DbDeviceStorage delete (deviceRegistrationId)
+      case Constants.ERROR_INVALID_REGISTRATION => H2DbDeviceStorage delete (deviceRegistrationId)
       case _ => // Handle errors as you want
     }
   }
