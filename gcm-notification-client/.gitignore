@@ -1,0 +1,13 @@
+bin
+build.xml
+gen
+local.properties
+proguard-project.txt
+project.properties
+logs
+.history
+.idea
+*.iml
+.idea_modules
+.classpath
+.project
