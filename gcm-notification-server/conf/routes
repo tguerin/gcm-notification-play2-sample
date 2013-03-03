@@ -1,0 +1,18 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+GET     /                           controllers.NotificationService.index
+
+# Notification service
+## Registration
+GET     /notification/registrations               controllers.NotificationService.list
+PUT     /notification/registrations              controllers.NotificationService.register
+DELETE  /notification/registrations/:regId        controllers.NotificationService.unregister(regId: String)
+
+## Notification push
+POST     /notification/push               controllers.NotificationService.pushNotification
+
+
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file               controllers.Assets.at(path="/public", file)
