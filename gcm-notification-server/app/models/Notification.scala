@@ -1,7 +1,7 @@
 package models
 
 import com.google.android.gcm.server.Message
-import play.api.libs.json.{JsValue, Format}
+import play.api.libs.json.{JsSuccess, JsValue, Format}
 
 case class Notification(message: String, collapseKey: Option[String], ttl: Option[Int]) {
 
@@ -24,10 +24,10 @@ object Notification {
     def writes(o: Notification) = null
 
     def reads(json: JsValue) = {
-      Notification(
+      JsSuccess(Notification(
         (json \ "message").as[String],
         (json \ "collapseKey").asOpt[String],
-        (json \ "ttl").asOpt[Int])
+        (json \ "ttl").asOpt[Int]))
     }
   }
 
