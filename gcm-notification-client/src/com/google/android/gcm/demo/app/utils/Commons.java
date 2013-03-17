@@ -20,6 +20,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.app.NotificationCompat;
 import com.google.android.gcm.demo.app.DemoActivity;
 import com.google.android.gcm.demo.app.R;
 
@@ -70,11 +71,12 @@ public final class Commons {
      * Issues a notification to inform the user that server has sent a message.
      */
     public static void notifyUser(Context context, String message) {
-        Notification notification = new Notification.Builder(context)
-                .addAction(R.drawable.ic_stat_gcm, message, buildPendingIntent(context)) //
+        Notification notification = new NotificationCompat.Builder(context)
                 .setSmallIcon(R.drawable.ic_stat_gcm) //
-                .setWhen(System.currentTimeMillis()) //
+                .setContentIntent(buildPendingIntent(context)) //
                 .setContentTitle(context.getString(R.string.notification_title)) //
+                .setContentText(message) //
+                .setWhen(System.currentTimeMillis()) //
                 .setAutoCancel(true) //
                 .build();
 
